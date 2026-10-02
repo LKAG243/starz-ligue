@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#10120f">
+	<meta name="description" content="Starz Ligue arrive. Seize sélections, quinze journées, trois mois de football et un mercato inédit.">
+	<title>Starz Ligue — La ville va jouer</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			color-scheme: dark;
+			--ink: #10120f;
+			--paper: #f1f0e9;
+			--muted: #a7aaa0;
+			--line: rgba(241, 240, 233, .16);
+			--lime: #d7ff3f;
+			--serif: "Playfair Display", Georgia, serif;
+			--sans: "DM Sans", "Segoe UI", sans-serif;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			background: var(--ink);
+			color: var(--paper);
+			font-family: var(--sans);
+			-webkit-font-smoothing: antialiased;
+		}
+		a { color: inherit; text-decoration: none; }
+		.page-shell { max-width: 1600px; margin: 0 auto; overflow: hidden; }
+		.topbar {
+			height: 88px;
+			padding: 0 7.2%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 1px solid var(--line);
+		}
+		.wordmark { display: inline-flex; align-items: center; gap: 11px; }
+		.wordmark-name {
+			font: 700 22px/.83 var(--serif);
+			letter-spacing: 0;
+		}
+		.wordmark-star { color: var(--lime); font-size: 32px; line-height: 1; }
+		.top-note, .eyebrow, .section-kicker, .metric-label, .footer-note {
+			text-transform: uppercase;
+			letter-spacing: .12em;
+			font-size: 10px;
+			font-weight: 700;
+		}
+		.top-note { color: var(--muted); }
+		.hero {
+			min-height: 680px;
+			padding: 78px 7.2% 72px;
+			display: grid;
+			grid-template-columns: 1fr .88fr;
+			gap: 6%;
+			align-items: center;
+			position: relative;
+			isolation: isolate;
+		}
+		.hero::before {
+			content: "";
+			position: absolute;
+			z-index: -1;
+			width: 480px;
+			height: 480px;
+			right: 9%;
+			top: 9%;
+			border: 1px solid rgba(215, 255, 63, .11);
+			border-radius: 50%;
+			box-shadow: 0 0 0 52px rgba(215, 255, 63, .025), 0 0 0 104px rgba(215, 255, 63, .018);
+			pointer-events: none;
+		}
+		.hero-copy { position: relative; z-index: 1; animation: rise .8s ease both; }
+		.eyebrow { display: flex; align-items: center; gap: 10px; color: var(--lime); }
+		.eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--lime); }
+		h1 {
+			max-width: 700px;
+			margin: 25px 0 22px;
+			font: 700 clamp(60px, 7.4vw, 112px)/.91 var(--serif);
+			letter-spacing: 0;
+		}
+		h1 span { color: var(--lime); font-style: italic; }
+		.hero-description {
+			max-width: 420px;
+			margin: 0;
+			color: #c2c4bb;
+			font-size: 16px;
+			line-height: 1.7;
+		}
+		.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+		.button {
+			min-height: 50px;
+			padding: 0 20px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 12px;
+			font-size: 12px;
+			font-weight: 700;
+			transition: background .2s ease, color .2s ease, transform .2s ease;
+		}
+		.button:hover { transform: translateY(-2px); }
+		.button-primary { background: var(--lime); color: var(--ink); }
+		.button-primary:hover { background: #e6ff8a; }
+		.button-secondary { border: 1px solid var(--line); color: var(--paper); }
+		.button-secondary:hover { border-color: var(--lime); color: var(--lime); }
+		.button-arrow { font-size: 17px; font-weight: 400; }
+		.hero-visual {
+			width: 100%;
+			max-width: 500px;
+			justify-self: end;
+			position: relative;
+			aspect-ratio: 4 / 4.65;
+			background: #252b26;
+			overflow: hidden;
+			animation: rise .9s .12s ease both;
+		}
+		.hero-visual img {
+			width: 100%;
+			height: 100%;
+			display: block;
+			object-fit: cover;
+			object-position: center 100%;
+			transform: scale(3.2);
+			transform-origin: center 63%;
+			filter: saturate(.83);
+		}
+		.hero-visual::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(180deg, rgba(16,18,15,.96) 0%, rgba(16,18,15,.72) 16%, transparent 36%, transparent 70%, rgba(16,18,15,.99) 100%);
+			pointer-events: none;
+		}
+		.visual-index {
+			position: absolute;
+			z-index: 1;
+			top: 18px;
+			right: 18px;
+			padding: 9px 11px;
+			background: var(--lime);
+			color: var(--ink);
+			font-size: 10px;
+			font-weight: 800;
+			letter-spacing: .1em;
+		}
+		.metrics {
+			padding: 27px 7.2%;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			border-top: 1px solid var(--line);
+			border-bottom: 1px solid var(--line);
+		}
+		.metric { padding: 5px 9%; border-right: 1px solid var(--line); }
+		.metric:first-child { padding-left: 0; }
+		.metric:last-child { border: 0; }
+		.metric-value { color: var(--lime); font: 700 34px/1 var(--serif); }
+		.metric-label { margin-top: 9px; color: var(--muted); }
+		.manifesto {
+			padding: 104px 7.2% 112px;
+			display: grid;
+			grid-template-columns: .72fr 1.28fr;
+			gap: 8%;
+			align-items: start;
+		}
+		.section-kicker { padding-top: 10px; color: var(--lime); }
+		.manifesto h2 {
+			max-width: 810px;
+			margin: 0;
+			font: 600 clamp(34px, 4.3vw, 58px)/1.12 var(--serif);
+			letter-spacing: 0;
+		}
+		.manifesto h2 em { color: var(--lime); font-weight: 600; }
+		.manifesto-copy { max-width: 590px; margin: 22px 0 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+		.mercato-band {
+			min-height: 220px;
+			padding: 40px 7.2%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 30px;
+			background: var(--lime);
+			color: var(--ink);
+		}
+		.mercato-band .section-kicker { color: #414b17; }
+		.mercato-band h2 { margin: 10px 0 0; font: 700 clamp(34px, 5.2vw, 68px)/1 var(--serif); }
+		.mercato-band p { max-width: 290px; margin: 0; font-size: 14px; line-height: 1.7; }
+		footer {
+			min-height: 105px;
+			padding: 24px 7.2%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			color: var(--muted);
+		}
+		.footer-note { font-size: 9px; }
+		.footer-contact { color: var(--paper); font-size: 12px; font-weight: 700; }
+		.footer-contact:hover { color: var(--lime); }
+		@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+		@media (max-width: 760px) {
+			.topbar { height: 72px; padding: 0 6%; }
+			.wordmark-name { font-size: 20px; }
+			.top-note { max-width: 130px; text-align: right; line-height: 1.5; }
+			.hero { min-height: 0; padding: 64px 6% 44px; grid-template-columns: 1fr; gap: 44px; }
+			.hero::before { width: 280px; height: 280px; right: -15%; top: 4%; }
+			h1 { max-width: 540px; font-size: clamp(58px, 15vw, 90px); }
+			.hero-description { font-size: 15px; }
+			.hero-visual { width: 100%; max-width: none; aspect-ratio: 1.08 / 1; }
+			.hero-visual img { object-position: center 100%; transform: scale(2.5); transform-origin: center 63%; }
+			.metrics { padding: 23px 6%; }
+			.metric { padding: 4px 10%; }
+			.metric-value { font-size: 29px; }
+			.metric-label { font-size: 8px; line-height: 1.5; }
+			.manifesto { padding: 72px 6% 78px; grid-template-columns: 1fr; gap: 24px; }
+			.manifesto h2 { font-size: clamp(36px, 9vw, 52px); }
+			.mercato-band { padding: 38px 6%; align-items: start; flex-direction: column; gap: 23px; }
+			.mercato-band p { max-width: 440px; }
+			footer { padding: 22px 6%; align-items: start; flex-direction: column; }
+		}
+		@media (max-width: 380px) {
+			.hero-actions { flex-direction: column; align-items: stretch; }
+			.button { width: 100%; }
+			.metric { padding-right: 6%; padding-left: 6%; }
+			.metric-value { font-size: 26px; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<div class="page-shell">
+		<header class="topbar">
+			<a class="wordmark" href="#accueil" aria-label="Starz Ligue, accueil">
+				<span class="wordmark-name">Starz<br>Ligue</span>
+				<span class="wordmark-star" aria-hidden="true">✳</span>
+			</a>
+			<span class="top-note">Le terrain nous attend.</span>
+		</header>
+
+		<main id="accueil">
+			<section class="hero" aria-labelledby="hero-title">
+				<div class="hero-copy">
+					<div class="eyebrow">Une nouvelle compétition arrive</div>
+					<h1 id="hero-title">La ville<br>va <span>jouer.</span></h1>
+					<p class="hero-description">Seize sélections. Des rivalités, des transferts et trois mois pour écrire l’histoire. Starz Ligue arrive sur le terrain.</p>
+					<div class="hero-actions">
+						<a class="button button-primary" href="tel:0976160916">Suivre le lancement <span class="button-arrow" aria-hidden="true">↗</span></a>
+						<a class="button button-secondary" href="#competition">Découvrir la ligue <span class="button-arrow" aria-hidden="true">↓</span></a>
+					</div>
+				</div>
+				<div class="hero-visual">
+					<img src="images/IMG-20261001-WA0017.jpg" alt="Des joueurs réunis, prêts à représenter leur sélection" fetchpriority="high">
+					<span class="visual-index">Saison inaugurale</span>
+				</div>
+			</section>
+
+			<section class="metrics" aria-label="Format prévisionnel de la compétition">
+				<div class="metric"><div class="metric-value">16</div><div class="metric-label">Sélections</div></div>
+				<div class="metric"><div class="metric-value">15</div><div class="metric-label">Journées</div></div>
+				<div class="metric"><div class="metric-value">120</div><div class="metric-label">Matchs annoncés</div></div>
+			</section>
+
+			<section class="manifesto" id="competition">
+				<div class="section-kicker">Plus qu’un match</div>
+				<div>
+					<h2>Ta ville. Ton équipe.<br><em>Votre histoire.</em></h2>
+					<p class="manifesto-copy">Des joueurs qui se rassemblent, une sélection qui prend forme, et toute une compétition à vivre ensemble. Les détails de la saison arrivent bientôt.</p>
+				</div>
+			</section>
+
+			<section class="mercato-band" id="mercato">
+				<div>
+					<div class="section-kicker">Le jeu ne s’arrête pas au coup de sifflet</div>
+					<h2>Le mercato arrive.</h2>
+				</div>
+				<p>Transferts, négociations, nouveaux renforts : la compétition se jouera aussi en dehors du terrain.</p>
+			</section>
+		</main>
+
+		<footer id="contact">
+			<a class="wordmark" href="#accueil" aria-label="Retour en haut de page"><span class="wordmark-name">Starz<br>Ligue</span><span class="wordmark-star" aria-hidden="true">✳</span></a>
+			<span class="footer-note">Le coup d’envoi approche</span>
+			<a class="footer-contact" href="tel:0976160916">Nous contacter · 09 76 16 09 16</a>
+		</footer>
+	</div>
+</body>
+</html>
